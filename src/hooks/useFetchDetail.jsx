@@ -13,11 +13,11 @@ const useFetchDetail = (url) => {
         const response = await axios.get(url);
         setLoading(false);
         setData(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (err) {
         setLoading(false);
         setError(err.message || "Something went wrong");
-        console.error("Error fetching now playing data:", err);
+        // console.error("Error fetching now playing data:", err);
       }
     };
 

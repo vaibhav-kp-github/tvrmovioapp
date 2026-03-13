@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import useFetchDetail from "../hooks/useFetchDetail";
@@ -9,6 +9,7 @@ import Divider from "../components/Divider";
 import useFetch from "../hooks/useFetch";
 import Loader from "../components/Loader";
 import fallbackImage from "../assets/fallbackImage";
+import VideoPlay from "../components/VideoPlay";
 
 const DetailsPages = () => {
   const param = useParams();
@@ -21,7 +22,7 @@ const DetailsPages = () => {
     loading: loadingDetail,
     error: errorDetail,
   } = useFetchDetail(`/${param?.explore}/${param?.id}`);
-  console.log("fetchDetail", fetchDetail);
+  // console.log("fetchDetail", fetchDetail);
   const {
     data: castData,
     loading: loadingCast,
@@ -48,10 +49,18 @@ const DetailsPages = () => {
     (el) => el.known_for_department === "Writing",
   );
   const Writer = writerObj?.name || "N/A";
-  console.log("cast data", castData);
-  console.log("similar data", similarData);
+  // console.log("cast data", castData);
+  // console.log("similar data", similarData);
+
+  const [playVideo, setPlayVideo] = useState(false);
+  const [playVideoId, setPlayVideoId] = useState("");
 
   // console.log("param", param);
+
+  const handlePlayVideoData = (fetchDetail) => {
+    setPlayVideoId(fetchDetail);
+    setPlayVideo(true);
+  };
 
   if (loadingDetail || loadingCast || loadingSimilar || loadingRecommended) {
     return <Loader />;
@@ -133,7 +142,10 @@ const DetailsPages = () => {
               className="h-80 w-60 object-cover rounded"
             />
 
-            <button className="bg-white hover:bg-linear-to-r from-red-700 to-orange-500 shadow-md transition-all hover:scale-105 px-4 py-2 text-black font-bold rounded mt-2 w-full">
+            <button
+              onClick={() => handlePlayVideoData(fetchDetail)}
+              className="bg-white hover:bg-linear-to-r from-red-700 to-orange-500 shadow-md transition-all hover:scale-105 px-4 py-2 text-black font-bold rounded mt-2 w-full"
+            >
               Play Now
             </button>
           </div>
@@ -234,6 +246,13 @@ const DetailsPages = () => {
             media_type={param?.explore}
           />
         </div>
+        {playVideo && (
+          <VideoPlay
+            data={playVideoId}
+            closeVideo={() => setPlayVideo(false)}
+            media_type={param?.explore}
+          />
+        )}
       </div>
     </>
   );
