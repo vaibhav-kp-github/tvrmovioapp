@@ -17,7 +17,7 @@ const useFetchDetail = (url) => {
       } catch (err) {
         setLoading(false);
         setError(err.message || "Something went wrong");
-        console.error("Error fetching now playing data:", err);
+        // console.error("Error fetching now playing data:", err);
       }
     };
 
