@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
+import { HelmetProvider } from "react-helmet-async";
 import { useLocation, useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 
@@ -52,10 +52,10 @@ const SearchPages = () => {
     },[]);
   return (
     <>
-      <Helmet>
+      <HelmetProvider >
         <title>Search Results | Movie App</title>
         <meta name="description" content="Search for movies and shows on Movie App. Find your favorites instantly." />
-      </Helmet>
+      </HelmetProvider>
     <div className="py-16">
       <div className=" w-full lg:hidden py-3 text-center px-5 sticky top-16 z-30">
         <input 

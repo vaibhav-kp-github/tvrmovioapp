@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { HelmetProvider } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import useFetchDetail from "../hooks/useFetchDetail";
 import { useSelector } from "react-redux";
@@ -75,7 +75,7 @@ const DetailsPages = () => {
   }
   return (
     <>
-      <Helmet>
+      <HelmetProvider>
         <title>
           {fetchDetail?.title || fetchDetail?.name || "Details"} | Movie App
         </title>
@@ -99,7 +99,7 @@ const DetailsPages = () => {
               : fallbackImage
           }
         />
-      </Helmet>
+      </HelmetProvider>
       <div aria-label="Details Page Content">
         <div
           className="w-full h-72 relative hidden lg:block"

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Helmet } from 'react-helmet';
+import { HelmetProvider } from "react-helmet-async";
 import { useParams } from 'react-router-dom'
 import Card from '../components/Card';
 
@@ -49,10 +49,10 @@ const ExplorePages = () => {
     setData([]);
     fetchData();
     <>
-      <Helmet>
+      <HelmetProvider>
         <title>Explore {params.explore ? params.explore.charAt(0).toUpperCase() + params.explore.slice(1) : ''} | Movie App</title>
         <meta name="description" content={`Explore ${params.explore || ''} movies and shows on Movie App.`} />
-      </Helmet>
+      </HelmetProvider>
     </>
   }, [params.explore]);
 

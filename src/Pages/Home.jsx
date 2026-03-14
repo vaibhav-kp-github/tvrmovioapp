@@ -1,5 +1,5 @@
 import React , { useEffect, useState } from 'react'
-import { Helmet } from 'react-helmet';
+import { HelmetProvider } from "react-helmet-async";
 import BannerHomw from '../components/BannerHomw'
 import { useSelector } from 'react-redux'
 import HorizontalCardScroll from '../components/HorizontalCardScroll'
@@ -16,10 +16,10 @@ const Home = () => {
   const { data : popularShowsData} = useFetch("/tv/popular");
   return (
     <>
-      <Helmet>
+      <HelmetProvider>
         <title>Home | Movie App</title>
         <meta name="description" content="Discover trending movies, now playing, top rated shows, and more on Movie App." />
-      </Helmet>
+      </HelmetProvider>
       <div>
       <BannerHomw />
 
